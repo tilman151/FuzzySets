@@ -19,8 +19,8 @@ class FuzzySet(collections.OrderedDict):
 
     """
     def __init__(self, degrees):
-        if (all(item <= 1.0 for item in degrees)
-                and all(item >= 0 for item in degrees)):
+        if (all(item <= 1.0 for item in degrees) and
+                all(item >= 0 for item in degrees)):
             super(FuzzySet, self).__init__(zip(
                 sorted(degrees, reverse=True),
                 [[] for x in xrange(len(degrees))]
