@@ -1,5 +1,6 @@
 """ Assignment 2: fuzzy sets bla bla bla """
 
+
 class Bcolors:
     """ Fancy colors y'all!"""
     header = '\033[95m'
@@ -93,6 +94,25 @@ def print_fuzzy_rhos(rho_set):
         print("-------------{0}".format(i))
         i = i + 1
 
+def get_combined_solution(all_solutions):
+    """ Combines all solutions to one """
+    w = len(all_solutions[1])
+    h = len(all_solutions[1][1])
+    solution = [[0 for x in range(w)] for y in range(h)]
+    for each_matrix in all_solutions:
+        for x, each_line in enumerate(each_matrix):
+            for y, each_item in enumerate(each_line):
+                if not solution[x][y] or each_item < solution[x][y]:
+                    solution[x][y] = each_item
+
+    return solution
+
+def print_solution(solution):
+    """ Prints one solution """
+    print(Bcolors.color("Optimal solution:", Bcolors.okblue))
+    for each_line in solution:
+        print(each_line)
+
 def main():
     """Fucking main function. God I hate pylint sometimes."""
 
@@ -104,7 +124,11 @@ def main():
 
     all_solutions = calc_solution_for_all(fuzzy_x, fuzzy_y)
 
-    print_fuzzy_rhos(all_solutions)
+    solution = get_combined_solution(all_solutions)
+
+    print_solution(solution)
+
+    #print_fuzzy_rhos(solution)
 
     #solutions = calc_solution_for_all(fuzzy_x, fuzzy_y)
 
